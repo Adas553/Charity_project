@@ -2,6 +2,7 @@ package pl.coderslab.charity.institution;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,5 +17,10 @@ public class InstitutionServiceImpl implements InstitutionService {
     @Override
     public Optional<Institution> findInstitutionByName(String name) {
         return institutionRepository.findInstitutionByName(name);
+    }
+
+    @Override
+    public List<Institution> findAllInstitutions() {
+        return institutionRepository.findAll();
     }
 }
