@@ -1,7 +1,10 @@
 package pl.coderslab.charity.category;
 
+import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
+@Service
 public class CategoryServiceImpl implements CategoryService{
 
     private final CategoryRepository categoryRepository;
