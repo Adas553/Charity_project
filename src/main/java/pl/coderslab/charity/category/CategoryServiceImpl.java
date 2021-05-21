@@ -14,7 +14,18 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public Optional<Category> findByCategoryName(String name) {
-        return categoryRepository.findCategoryByName(name);
+    public Optional<CategoryDto> findByCategoryName(String name) {
+        return categoryRepository.findCategoryByName(name)
+                .map(this::convertToCategoryDto);
     }
+
+    public CategoryDto convertToCategoryDto(Category category) {
+        CategoryDto categoryDto = new CategoryDto(
+                category.getName()
+        );
+
+        return categoryDto;
+    }
+
+
 }

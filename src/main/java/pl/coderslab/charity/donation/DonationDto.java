@@ -5,41 +5,50 @@ import pl.coderslab.charity.category.Category;
 import pl.coderslab.charity.institution.Institution;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class Donation {
+public class DonationDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long id = 0L;
 
-    private int quantity;
+    @NotNull
+    @Positive
+    private Integer quantity;
 
-    @ManyToMany
-    private List<Category> categoryList = new ArrayList<>();
+    @NotEmpty
+    private List<Long> categoryList = new ArrayList<>();
 
-    @ManyToOne
-    private Institution institution;
+    @NotNull
+    @Positive
+    private Long institution;
 
+    @NotBlank
     private String street;
 
+    @NotBlank
     private String city;
 
+    @NotBlank
     private String zipCode;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
     private LocalDate pickUpDate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
     private LocalTime pickUpTime;
 
     private String pickUpComment;
 
-    public Donation() {
+    public DonationDto() {
     }
 
     public long getId() {
@@ -50,27 +59,27 @@ public class Donation {
         this.id = id;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
-    public List<Category> getCategoryList() {
+    public List<Long> getCategoryList() {
         return categoryList;
     }
 
-    public void setCategoryList(List<Category> categoryList) {
+    public void setCategoryList(List<Long> categoryList) {
         this.categoryList = categoryList;
     }
 
-    public Institution getInstitution() {
+    public Long getInstitution() {
         return institution;
     }
 
-    public void setInstitution(Institution institution) {
+    public void setInstitution(Long institution) {
         this.institution = institution;
     }
 

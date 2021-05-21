@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class InstitutionServiceImpl implements InstitutionService {
@@ -15,12 +16,25 @@ public class InstitutionServiceImpl implements InstitutionService {
     }
 
     @Override
-    public Optional<Institution> findInstitutionByName(String name) {
-        return institutionRepository.findInstitutionByName(name);
+    public Optional<InstitutionDto> findInstitutionByName(String name) {
+        return institutionRepository.findInstitutionByName(name)
+                .map(this::convertToInstitutionDto);
     }
 
     @Override
-    public List<Institution> findAllInstitutions() {
-        return institutionRepository.findAll();
+    public List<InstitutionDto> findAllInstitutions() {
+        return institutionRepository.findAll()
+                .stream()
+                .map(this::convertToInstitutionDto)
+                .collect(Collectors.toList());
+    }
+
+    public InstitutionDto convertToInstitutionDto(Institution institution) {
+        InstitutionDto institutionDto = new InstitutionDto(
+                institution.getName(),
+                institution.getDescription()
+        );
+
+        return institutionDto;
     }
 }

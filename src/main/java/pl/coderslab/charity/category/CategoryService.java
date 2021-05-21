@@ -6,5 +6,5 @@ import java.util.Optional;
 
 @Service
 public interface CategoryService {
-    Optional<Category> findByCategoryName(String name);
+    Optional<CategoryDto> findByCategoryName(String name);
 }

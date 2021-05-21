@@ -7,6 +7,6 @@ import java.util.Optional;
 
 @Service
 public interface InstitutionService{
-    Optional<Institution> findInstitutionByName(String name);
-    List<Institution> findAllInstitutions();
+    Optional<InstitutionDto> findInstitutionByName(String name);
+    List<InstitutionDto> findAllInstitutions();
 }

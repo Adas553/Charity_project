@@ -6,7 +6,7 @@ import java.util.List;
 
 @Service
 public interface DonationService {
-    List<Donation> findAllDonations();
+    List<DonationDto> findAllDonations();
     Long numberOfQuantities();
     Long numberOfDonations();
 }

@@ -1,22 +1,22 @@
 package pl.coderslab.charity.category;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "categories")
-public class Category {
+public class CategoryDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long id = 0L;
 
+    @NotBlank
     private String name;
 
-    public Category(String name) {
+    public CategoryDto(String name) {
         this.name = name;
     }
 
-    public Category() {
+    public CategoryDto() {
     }
 
     public long getId() {
@@ -35,3 +35,4 @@ public class Category {
         this.name = name;
     }
 }
+

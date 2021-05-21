@@ -1,25 +1,26 @@
 package pl.coderslab.charity.institution;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "institutions")
-public class Institution {
+public class InstitutionDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long id = 0L;
 
+    @NotBlank
     private String name;
 
+    @NotBlank
     private String description;
 
-    public Institution(String name, String description) {
+    public InstitutionDto(String name, String description) {
         this.name = name;
         this.description = description;
     }
 
-    public Institution() {
+    public InstitutionDto() {
     }
 
     public long getId() {

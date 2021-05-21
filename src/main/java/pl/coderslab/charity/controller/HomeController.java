@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import pl.coderslab.charity.donation.DonationService;
 import pl.coderslab.charity.institution.Institution;
+import pl.coderslab.charity.institution.InstitutionDto;
 import pl.coderslab.charity.institution.InstitutionService;
 
 import java.util.List;
@@ -23,10 +24,10 @@ public class HomeController {
 
     @GetMapping("/")
     public String homeAction(Model model) {
-        List<Institution> institutions = institutionService.findAllInstitutions();
+        List<InstitutionDto> institutionsDto = institutionService.findAllInstitutions();
         Long quantities = donationService.numberOfQuantities();
         Long donations = donationService.numberOfDonations();
-        model.addAttribute("institutions", institutions);
+        model.addAttribute("institutions", institutionsDto);
         model.addAttribute("quantities", quantities);
         model.addAttribute("donations", donations);
         return "index";
