@@ -1,6 +1,8 @@
 package pl.coderslab.charity.donation;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import pl.coderslab.charity.category.Category;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,16 +17,16 @@ public class DonationServiceImpl implements DonationService {
     }
 
     @Override
-    public List<DonationDto> findAllDonations() {
-        return donationRepository.findAll()
-                .stream()
-                .map(this::convertToDonationDto)
-                .collect(Collectors.toList());
+    public List<DonationDto> findSelectedDonations() {
+       return donationRepository.findAll(PageRequest.of(0, 4))
+        .map(this::convertToDonationDto)
+        .getContent();
     }
 
     @Override
     public Long numberOfQuantities() {
-        return findAllDonations().stream()
+        return findSelectedDonations()
+                .stream()
                 .map(DonationDto::getQuantity)
                 .mapToLong(Integer::longValue)
                 .sum();
@@ -32,9 +34,10 @@ public class DonationServiceImpl implements DonationService {
 
     @Override
     public Long numberOfDonations() {
-        return findAllDonations().stream()
-                .count();
+        return donationRepository.numberOfBags();
     }
+
+
 
     public DonationDto convertToDonationDto(Donation donation) {
         DonationDto donationDto = new DonationDto();
@@ -42,7 +45,7 @@ public class DonationServiceImpl implements DonationService {
         donationDto.setQuantity(donation.getQuantity());
         donationDto.setCategoryList(donation.getCategoryList()
         .stream()
-        .map(x -> x.getId())
+        .map(Category::getId)
         .collect(Collectors.toList()));
         donationDto.setInstitution(donation.getInstitution().getId());
         donationDto.setStreet(donation.getStreet());
@@ -54,5 +57,11 @@ public class DonationServiceImpl implements DonationService {
 
         return donationDto;
     }
+
+//    public Donation convertToDonation(DonationDto donationDto) {
+//        Donation donation = new Donation();
+//        donation.setId(donationDto.getId());
+//        donation
+//    }
 
 }

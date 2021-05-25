@@ -17,9 +17,9 @@ public class HomeController {
     private final InstitutionService institutionService;
     private final DonationService donationService;
 
-    public HomeController(InstitutionService institutionServiceImpl, DonationService donationService) {
+    public HomeController(InstitutionService institutionServiceImpl, DonationService donationServiceImpl) {
         this.institutionService = institutionServiceImpl;
-        this.donationService = donationService;
+        this.donationService = donationServiceImpl;
     }
 
     @GetMapping("/")

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="header.jsp"%>
+<%@include file="header.jsp" %>
 
 <section class="stats">
     <div class="container container--85">
@@ -69,42 +69,36 @@
         <p>W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi współpracujemy.
             Możesz sprawdzić czym się zajmują.</p>
 
-        <c:forEach items="${institutions}" var="institution" varStatus="loopStatus">
         <ul class="help--slides-items">
-            <li>
-
-                <div class="col">
-                    <c:if test="${loopStatus.index < 2}">
+            <c:forEach items="${institutions}" var="institution" varStatus="loopStatus">
+                <c:if test="${loopStatus.count % 2 != 0}">
+                    <li>
+                </c:if>
+                    <div class="col">
                     <div class="title"><c:out value="${institution.name}"/></div>
                     <div class="subtitle"><c:out value="${institution.description}"/></div>
+
+                </div>
+                    <c:if test="${loopStatus.count % 2 == 0}">
+                </li>
                     </c:if>
-                </div>
 
 
-                <div class="col">
-                    <c:if test="${loopStatus.index >= 2}">
-                    <div class="title"><c:out value="${institution.name}"/> ${loopStatus.index}</div>
-                    <div class="subtitle"><c:out value="${institution.description}"/></div>
-                </div>
-                </c:if>
-            </li>
+                <%--            <li>--%>
+                <%--                <div class="col">--%>
+                <%--                    <div class="title"><c:out value="${institution.name}"/></div>--%>
+                <%--                    <div class="subtitle"><c:out value="${institution.description}"/></div>--%>
+                <%--                </div>--%>
+                <%--                <div class="col">--%>
+                <%--                    <div class="title"><c:out value="${institution.name}"/></div>--%>
+                <%--                    <div class="subtitle"><c:out value="${institution.description}"/></div>--%>
+                <%--                </div>--%>
 
-<%--            <li>--%>
-<%--                <div class="col">--%>
-<%--                    <div class="title"><c:out value="${institution.name}"/></div>--%>
-<%--                    <div class="subtitle"><c:out value="${institution.description}"/></div>--%>
-<%--                </div>--%>
-<%--                <div class="col">--%>
-<%--                    <div class="title"><c:out value="${institution.name}"/></div>--%>
-<%--                    <div class="subtitle"><c:out value="${institution.description}"/></div>--%>
-<%--                </div>--%>
-
-<%--            </li>--%>
-
+                <%--            </li>--%>
+            </c:forEach>
         </ul>
-        </c:forEach>
     </div>
 
 </section>
 
-<%@include file="footer.jsp"%>
+<%@include file="footer.jsp" %>
